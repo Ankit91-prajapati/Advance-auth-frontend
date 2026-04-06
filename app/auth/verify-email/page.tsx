@@ -1,10 +1,11 @@
-import VerifyClient from "@/components/verify-client"; //light dynamic 
-// client can be inside server not opposite
+"use client";
+import VerifyClient from "@/components/verify-client";
 
-export default function Page({
-  searchParams,
-}: {
-  searchParams: { token?: string };
-}) {
-  return <VerifyClient token={searchParams.token} />;
+import { Suspense } from "react";
+export default function Page() {
+  return (
+    <Suspense fallback={<div>verifying email.......</div>}> 
+      <VerifyClient />
+    </Suspense>
+  );
 }

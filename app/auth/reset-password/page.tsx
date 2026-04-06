@@ -1,9 +1,16 @@
-import ResetPasswordForm from "@/components/reset-password-form"; //light dynamic page
+"use client";
+import ResetPasswordForm from "@/components/reset-password-form";
+import { Suspense } from "react";
 
-export default function Page({
-  searchParams,
-}: {
-  searchParams: { token?: string };
-}) {
-  return <ResetPasswordForm token={searchParams.token} />;
+
+export default function Page() {
+ 
+
+  return (
+     <Suspense fallback={<div>verifying email.......</div>}> 
+    <ResetPasswordForm />;
+    </Suspense>
+  )
+ 
+  
 }

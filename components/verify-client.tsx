@@ -3,8 +3,11 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "@/lib/api";
+import { useSearchParams } from "next/navigation";
 
-export default function VerifyClient({ token }: { token?: string }) {
+export default function VerifyClient() {
+   const searchParams = useSearchParams();
+    const token = searchParams.get("token") || "";
   const router = useRouter();
   const [status, setStatus] = useState<
     "loading" | "success" | "error"

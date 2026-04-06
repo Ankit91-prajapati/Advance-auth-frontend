@@ -5,8 +5,11 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import api from "@/lib/api";
 import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
-export default function ResetPasswordForm({ token }: { token?: string }) {
+export default function ResetPasswordForm() {
+   const searchParams = useSearchParams();
+  const token = searchParams.get("token") || "";
   const [newPassword, setNewPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
