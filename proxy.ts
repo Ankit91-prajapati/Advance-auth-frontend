@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic" //we don't need to set this
+
 import { NextRequest, NextResponse } from "next/server";
 
 export function proxy(req: NextRequest) {
