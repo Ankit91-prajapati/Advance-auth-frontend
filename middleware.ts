@@ -1,8 +1,8 @@
-export const dynamic = "force-dynamic" //we don't need to set this
+
 
 import { NextRequest, NextResponse } from "next/server";
 
-export function proxy(req: NextRequest) {
+export function middleware(req: NextRequest) {
   const token = req.cookies.get("accessToken")?.value;
   const { pathname } = req.nextUrl;
 
@@ -20,4 +20,8 @@ export function proxy(req: NextRequest) {
   }
 
   return NextResponse.next();
+
+}
+export const config={
+  matcher:["/dashboard/:path*" , "/auth/:path*"]
 }
