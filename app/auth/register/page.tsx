@@ -68,7 +68,7 @@ export default function RegisterPage() {
           type="submit"
           className="w-full bg-green-500 hover:bg-green-600 text-white p-3 rounded-lg"
         >
-          {loading ? "registering" : "Register"}
+          {loading ? "registering..." : "Register"}
         </button>
 
         <p className="text-sm text-center text-gray-300">
