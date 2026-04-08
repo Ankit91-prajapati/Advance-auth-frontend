@@ -1,31 +1,43 @@
 import axios from "axios";
+import { redirect } from "next/navigation"; // Only works in Server components/Actions
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
 });
 
-export default api;
-
 api.interceptors.response.use(
-  (res): any => res,
+  (res) => res,
   async (error) => {
-    const original = error.config;
+    const originalRequest = error.config;
 
-    if (error.response?.status === 401 && !original?._retry) {
-      original._retry = true;
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
 
       try {
-        await api.post("/api/auth/refresh");
-
-        return api(original);
+        await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/auth/refresh`,
+          {},
+          { withCredentials: true }
+        );
+        return api(originalRequest);
       } catch (err) {
+        // --- AUTH FAILURE LOGIC ---
+        
+        // 1. Client-Side (Browser)
         if (typeof window !== "undefined") {
-          window.location.href = "/auth/login";
+          window.location.href = "/auth/login?expired=true";
+        } 
+        // 2. Server-Side (SSR / Server Actions)
+        else {
+          // In Next.js Server Actions or Metadata, you can use redirect()
+          // Note: This only works if this axios call is awaited inside a Server Action/Component
+          redirect("/auth/login?expired=true");
         }
       }
     }
-
     return Promise.reject(error);
   }
 );
+
+export default api;

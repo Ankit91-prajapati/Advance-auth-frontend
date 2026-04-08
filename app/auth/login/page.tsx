@@ -21,7 +21,7 @@ export default function LoginPage() {
    
     toast.success(response.data.message)
     if(response.data.success){
-        router.push("/dashboard")
+       router.push("/dashboard");
     }
 
    
