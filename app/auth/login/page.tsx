@@ -17,12 +17,13 @@ export default function LoginPage() {
    try {
     setLoading(true)
     const response = await api.post("/api/auth/login", {email ,password} )
+     if(response.data.success){
+       router.push("/dashboard");
+    }
     console.log(response.data)
    
     toast.success(response.data.message)
-    if(response.data.success){
-       router.push("/dashboard");
-    }
+   
 
    
    } catch (err:any) {
