@@ -10,7 +10,7 @@ export const RefreshProvider = ({ children }: { children: React.ReactNode }) => 
 
   const refresh = async () => {
     try {
-      const res = await api.get("/auth/refresh");
+      const res = await api.post("/api/auth/refresh");
     } catch (err) {
       console.log("User not logged in");
     }

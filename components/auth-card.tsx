@@ -1,5 +1,5 @@
 "use client";
-
+export const dynamic ="force-dynamic"
 
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -41,6 +41,7 @@ export default function AuthCard({ children, title }: AuthCardProps) {
       
       {/* Google Login Button */}
       <button
+       suppressHydrationWarning
         className={`flex items-center justify-center w-full h-12 bg-slate-100 rounded-lg transition-all hover:scale-105 hover:bg-orange-50 ${
           loading ? "opacity-50 cursor-not-allowed" : ""
         }`}
