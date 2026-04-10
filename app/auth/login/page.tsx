@@ -20,7 +20,7 @@ export default function LoginPage() {
      if(response.data.success){
       setTimeout(() => {
           router.push("/auth/login");
-        }, 1000);
+        }, 500);
     }
     console.log(response.data)
    
