@@ -26,7 +26,7 @@ export default function VerifyClient() {
 
         setTimeout(() => {
           router.push("/auth/login");
-        }, 1500);
+        }, 500);
       } catch (err) {
         setStatus("error");
       }
