@@ -2,7 +2,6 @@
 
 import AuthCard from "@/components/auth-card";
 import api from "@/lib/api";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -11,7 +10,7 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
- const router =useRouter()
+
 
   async function registerHandler(e: any) {
     e.preventDefault();
@@ -24,7 +23,7 @@ export default function RegisterPage() {
       });
 
       toast.success(response.data.message)
-      router.push("/dashboard")
+   
       console.log(response.data);
     }
     

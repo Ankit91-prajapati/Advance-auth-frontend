@@ -23,10 +23,10 @@ export default function Dashboard() {
     e.preventDefault();
 
     try {
-      const response = await api.post("/api/auth/logout" ,  {withCredentials: true});
+      const response = await api.post("/api/auth/logout" ,{} , {withCredentials: true});
       toast.success(response.data.message);
       if(response.data.success){
- router.push("/auth/login");
+          router.push("/auth/login");
       }
      
     } catch (error) {

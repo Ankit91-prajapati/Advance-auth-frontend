@@ -18,7 +18,9 @@ export default function LoginPage() {
     setLoading(true)
     const response = await api.post("/api/auth/login", {email ,password} )
      if(response.data.success){
-       router.push("/dashboard");
+      setTimeout(() => {
+          router.push("/auth/login");
+        }, 1500);
     }
     console.log(response.data)
    
