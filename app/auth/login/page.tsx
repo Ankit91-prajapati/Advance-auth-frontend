@@ -17,6 +17,11 @@ export default function LoginPage() {
    try {
     setLoading(true)
     const response = await api.post("/api/auth/login", {email ,password} )
+     if(response.data.success){
+      setTimeout(() => {
+          router.push("/auth/login");
+        }, 1000);
+    }
     console.log(response.data)
    
     toast.success(response.data.message)
