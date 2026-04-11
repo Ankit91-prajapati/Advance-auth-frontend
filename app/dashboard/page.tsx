@@ -41,11 +41,11 @@ export default function Dashboard() {
   return (
     <div >
       <div className="group">
-        <div className="absolute top-0 left-0 text-2xl m-8 rounded-full w-8 h-8 text-center bg-blue-500 text-white opacity-100 group-hover:opacity-0">
+        <div className="absolute top-0 left-0 text-2xl m-8 rounded-full w-8 h-8 text-center bg-blue-500 text-white opacity-100 group-hover:opacity-0 group-active:opacity-0">
           {username?.charAt(0) || "D"}
         </div>
 
-        <div className="absolute text-2xl text-white top-0 left-0 m-8 opacity-0 group-hover:opacity-100">
+        <div className="absolute text-2xl text-white top-0 left-0 m-8 opacity-0 group-hover:opacity-100  group-active:opacity-100">
           {username || "Developer"}
         </div>
       </div>
