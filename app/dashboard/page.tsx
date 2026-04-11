@@ -51,7 +51,7 @@ export default function Dashboard() {
       </div>
 
       <button
-        className="absolute top-0 right-0 m-6 w-20 p-1 rounded-xl text-white text-xl bg-red-50 hover:bg-red-700 text-gray-900"
+        className="absolute top-0 right-0 m-6 w-20 p-1 rounded-xl text-white text-xl bg-red-400 hover:bg-red-800 "
         onClick={handleLogout}
       >
         Logout
