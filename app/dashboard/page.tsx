@@ -40,8 +40,8 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className=" relative top-0 left-0" >
-        <div onClick={() => setShow(!show)} className="relative">
+    <div  >
+        <div onClick={() => setShow(!show)} className="relative  top-0 left-0">
       
       {!show && ( 
         <div className="absolute top-0 left-0 text-2xl m-8 rounded-full w-8 h-8 text-center bg-blue-500 text-white">
