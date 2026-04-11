@@ -40,7 +40,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div >
+    <div className=" relative top-0 left-0" >
         <div onClick={() => setShow(!show)} className="relative">
       
       {!show && ( 
