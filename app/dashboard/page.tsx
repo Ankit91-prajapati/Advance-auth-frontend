@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 export default function Dashboard() {
   const [username, setUsername] = useState<string|null>(null);
   const router = useRouter();
+  const [show, setShow] = useState(false);
 
   async function getUser() {
     try {
@@ -40,15 +41,21 @@ export default function Dashboard() {
 
   return (
     <div >
-      <div className="group">
-        <div className="absolute top-0 left-0 text-2xl m-8 rounded-full w-8 h-8 text-center bg-blue-500 text-white opacity-100 md:group-hover:opacity-0 group-active:opacity-0">
+        <div onClick={() => setShow(!show)} className="relative">
+      
+      {!show && ( 
+        <div className="absolute top-0 left-0 text-2xl m-8 rounded-full w-8 h-8 text-center bg-blue-500 text-white">
           {username?.charAt(0) || "D"}
         </div>
+      )}
 
-        <div className="absolute text-2xl text-white top-0 left-0 m-8 opacity-0 md:group-hover:opacity-100  group-active:opacity-100">
+      {show && (
+        <div className="absolute text-2xl text-white top-0 left-0 m-8">
           {username || "Developer"}
         </div>
-      </div>
+      )}
+
+    </div>
 
       <button
         className="absolute top-0 right-0 m-6 w-20 p-1 rounded-xl text-white text-xl bg-red-400 md:hover:bg-red-800 active:bg-red-800 "
