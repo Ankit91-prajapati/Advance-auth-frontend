@@ -6,13 +6,13 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function Dashboard() {
-  const [username, setUsername] = useState<string|null>(null);
+  const [username, setUsername] = useState<string | null>(null);
   const router = useRouter();
   const [show, setShow] = useState(false);
 
   async function getUser() {
     try {
-      const response = await api.get("/user/me" ,);  
+      const response = await api.get("/user/me");
       const user = response.data.user;
       setUsername(user.username);
     } catch (err) {
@@ -24,12 +24,15 @@ export default function Dashboard() {
     e.preventDefault();
 
     try {
-      const response = await api.post("/api/auth/logout" ,{} , {withCredentials: true});
+      const response = await api.post(
+        "/api/auth/logout",
+        {},
+        { withCredentials: true }
+      );
       toast.success(response.data.message);
-      if(response.data.success){
-          router.push("/auth/login");
+      if (response.data.success) {
+        router.push("/auth/login");
       }
-     
     } catch (error) {
       console.log(error);
     }
@@ -40,25 +43,27 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div  >
-        <div onClick={() => setShow(!show)} className="relative  top-0 left-0">
+    <div className="relative min-h-screen w-full">
       
-      {!show && ( 
-        <div className="absolute top-0 left-0 text-2xl m-8 rounded-full w-8 h-8 text-center bg-blue-500 text-white">
-          {username?.charAt(0) || "D"}
-        </div>
-      )}
+      {/* Top Left User */}
+      <div
+        onClick={() => setShow(!show)}
+        className="absolute top-4 left-4 cursor-pointer"
+      >
+        {!show ? (
+          <div className="text-2xl w-10 h-10 flex items-center justify-center rounded-full bg-blue-500 text-white">
+            {username?.charAt(0) || "D"}
+          </div>
+        ) : (
+          <div className="text-xl text-black font-semibold">
+            {username || "Developer"}
+          </div>
+        )}
+      </div>
 
-      {show && (
-        <div className="absolute text-2xl text-white top-0 left-0 m-8">
-          {username || "Developer"}
-        </div>
-      )}
-
-    </div>
-
+      {/* Logout Button */}
       <button
-        className="absolute top-0 right-0 m-6 w-20 p-1 rounded-xl text-white text-xl bg-red-400 md:hover:bg-red-800 active:bg-red-800 "
+        className="absolute top-4 right-4 w-24 p-2 rounded-xl text-white text-lg bg-red-400 md:hover:bg-red-800 active:bg-red-800"
         onClick={handleLogout}
       >
         Logout
