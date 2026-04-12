@@ -1,4 +1,4 @@
-// proxy.ts
+// middleware.ts (not proxy.ts)
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
@@ -12,9 +12,9 @@ export const config = {
   ],
 };
 
-export function proxy(request: NextRequest) {
+export function middleware(request: NextRequest) {  // Changed from 'proxy' to 'middleware'
   // Example: Check for an authentication token in cookies
- const  isLoggedIn= request.cookies.get('refreshToken')?.value;
+  const isLoggedIn = request.cookies.get('refreshToken')?.value;
   const isOnProtectedRoute = request.nextUrl.pathname.startsWith('/dashboard');
   const isOnAuthPage = request.nextUrl.pathname.startsWith('/auth/login');
 
