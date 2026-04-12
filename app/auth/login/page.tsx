@@ -12,32 +12,26 @@ export default function LoginPage() {
   const[password ,setPassword] = useState<string>("")
   const[loading ,setLoading] = useState<boolean>(false)
   const router = useRouter()
- async function loginHandler(e:any) {
-   e.preventDefault()
-   try {
+ async function loginHandler(e: any) {
+  e.preventDefault()
+  try {
     setLoading(true)
-    const response = await api.post("/api/auth/login", {email ,password} )
-     if(response.data.success){
-      setTimeout(()=>{
-        router.push("/dashboard");
-      }, 500)
+    const response = await api.post("/api/auth/login", { email, password })
     
+    if (response.data.success) {
+      toast.success(response.data.message)
+      // This replaces the current URL and doesn't push to history
+      // It also waits for all headers to be processed
+      setTimeout(() => {
+        window.location.href = "/dashboard"
+      }, 100)
     }
-    console.log(response.data)
-   
-    toast.success(response.data.message)
-   
-
-   
-   } catch (err:any) {
-     toast.error(err.response?.data?.message || "somting went wrong")
-   }
-   finally{
+  } catch (err: any) {
+    toast.error(err.response?.data?.message || "Something went wrong")
+  } finally {
     setLoading(false)
-   }
-
-    
   }
+}
 
   return (
     <AuthCard title="Login">
