@@ -5,7 +5,7 @@ import AuthCard from "@/components/auth-card";
 
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [email ,setEmail] = useState<string>("")
@@ -19,13 +19,10 @@ export default function LoginPage() {
     const response = await api.post("/api/auth/login", { email, password })
     
     if (response.data.success) {
-      toast.success(response.data.message)
-      // This replaces the current URL and doesn't push to history
-      // It also waits for all headers to be processed
-      setTimeout(() => {
-        window.location.href = "/dashboard"
-      }, 100)
-    }
+  toast.success(response.data.message);
+  window.location.replace("/dashboard"); // cookie is set, hard reload guarantees middleware sees it
+}
+    
   } catch (err: any) {
     toast.error(err.response?.data?.message || "Something went wrong")
   } finally {

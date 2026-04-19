@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
-import { RefreshProvider } from "@/context/auth-context";
+import { AuthProvider } from "@/context/auth-context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +31,7 @@ export default function RootLayout({
       >
         <div className=" relative min-h-screen bg-[conic-gradient(from_230deg_at_center,_#B2D4E4,_#478BD6,_#003465)] flex flex-row items-center justify-center">
           <ToastContainer />
-          <RefreshProvider>{children}</RefreshProvider>
+          <AuthProvider>{children}</AuthProvider>
         </div>
       </body>
     </html>

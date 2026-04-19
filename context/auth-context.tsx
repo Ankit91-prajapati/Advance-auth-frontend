@@ -1,30 +1,71 @@
 "use client";
 
-import { createContext, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import api from "@/lib/api";
-import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
+type User = {
+  _id: string;
+  username: string;
+  email: string;
+};
 
-export const RefreshContext = createContext<any>(null);
+type AuthType = {
+  user: User | null;
+  loading: boolean;
+  refresh: () => Promise<void>;
+  logout: () => Promise<void>;
+};
 
-export const RefreshProvider = ({ children }: { children: React.ReactNode }) => {
+const AuthContext = createContext<AuthType | null>(null);
 
-  const refresh = async () => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  // 🔄 get user
+  const fetchUser = async () => {
     try {
-      const res = await api.post("/api/auth/refresh");
-      toast.success(res.data.message)
-    } catch (err) {
-      console.log("User not logged in");
+      const res = await api.get("/user/me");
+      setUser(res.data.user);
+    } catch {
+      setUser(null);
+    } finally {
+      setLoading(false);
     }
   };
 
+  // 🔄 refresh token
+  const refresh = async () => {
+    try {
+      await api.post("/api/auth/refresh");
+      await fetchUser();
+    } catch {
+      setUser(null);
+    }
+  };
+
+  // 🚪 logout
+  const logout = async () => {
+    await api.post("/api/auth/logout");
+    setUser(null);
+    router.push("/auth/login");
+  };
+
   useEffect(() => {
-    refresh();
+    fetchUser();
   }, []);
 
   return (
-    <RefreshContext.Provider value={{}}>
+    <AuthContext.Provider value={{ user, loading, refresh, logout }}>
       {children}
-    </RefreshContext.Provider>
+    </AuthContext.Provider>
   );
+};
+
+export const useAuth = () => {
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error("AuthContext not found");
+  return ctx;
 };
