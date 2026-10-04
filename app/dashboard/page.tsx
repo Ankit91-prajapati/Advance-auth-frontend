@@ -1,6 +1,6 @@
 "use client";
 
-import Protected from "@/components/protected-route";
+// import Protected from "@/components/protected-route";
 import { useAuth } from "@/context/auth-context";
 import { useState } from "react";
 
@@ -9,7 +9,7 @@ export default function Dashboard() {
   const [show, setShow] = useState(false);
 
   return (
-    <Protected>
+    // <Protected> // protected is used for react because in nextjs i am using proxy(middleware) for validation
       <div className="relative min-h-screen w-full">
         
         {/* User */}
@@ -28,6 +28,8 @@ export default function Dashboard() {
           )}
         </div>
 
+        
+
         {/* Logout */}
         <button
           className="absolute top-4 right-4 w-24 p-2 rounded-xl text-white text-lg bg-red-400 md:hover:bg-red-800 active:bg-red-800"
@@ -36,6 +38,6 @@ export default function Dashboard() {
           Logout
         </button>
       </div>
-    </Protected>
+    // </Protected>
   );
 }

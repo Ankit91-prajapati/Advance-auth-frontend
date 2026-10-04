@@ -29,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className=" relative min-h-screen bg-[conic-gradient(from_230deg_at_center,_#B2D4E4,_#478BD6,_#003465)] flex flex-row items-center justify-center">
+        <div className=" relative min-h-screen bg-[conic-gradient(from_230deg_at_center,#296D98,#479DFF,#0E2433)] flex flex-row items-center justify-center">
           <ToastContainer />
           <AuthProvider>{children}</AuthProvider>
         </div>

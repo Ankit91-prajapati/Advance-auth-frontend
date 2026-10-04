@@ -4,7 +4,7 @@ import { useAuth } from "@/context/auth-context";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-export default function Protected({
+export default function Protected({ // protected is used for react because in nextjs i am using proxy(middleware) for validation
   children,
 }: {
   children: React.ReactNode;
