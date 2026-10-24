@@ -38,7 +38,6 @@ export default function AuthCard({ children, title }: AuthCardProps) {
 
   return (
     <div className="flex flex-col items-center justify-center h-96 md:w-100 bg-transparent backdrop-blur-lg border border-white/20 shadow-xl rounded-xl mx-6 p-8">
-      <h1  className="text-2xl pb-2"><span className="text-red-400">Ricoz</span>MFG</h1>
       <button
         className={`flex items-center justify-center w-full h-12 bg-white rounded-lg transition-all active:scale-95 shadow-sm ${
           loading ? "opacity-70 cursor-wait" : "hover:bg-gray-50 hover:shadow-md"
