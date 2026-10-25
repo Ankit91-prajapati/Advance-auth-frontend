@@ -21,7 +21,7 @@ export default function VerifyClient() {
 
     const verify = async () => {
       try {
-        await api.post("/api/auth/verify-email", { token });
+        await api.post("/auth/verify-email", { token });
         setStatus("success");
 
         setTimeout(() => {
